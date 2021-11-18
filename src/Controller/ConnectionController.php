@@ -18,7 +18,7 @@ class ConnectionController extends AbstractController
     #[Route('/register', name: 'register')]
     public function register(): Response
     {
-        return $this->render('conntection/register.html.twig', [
+        return $this->render('connection/register.html.twig', [
             'controller_name' => 'ConnectionController',
         ]);
     }
