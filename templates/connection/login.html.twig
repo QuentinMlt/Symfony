@@ -3,18 +3,18 @@
 {% block title %}Hello ConnectionController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/Repository_Github/Symfony/src/Controller/ConnectionController.php'|file_link(0) }}">src/Controller/ConnectionController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/Repository_Github/Symfony/templates/connection/login.html.twig'|file_link(0) }}">templates/connection/login.html.twig</a></code></li>
-    </ul>
+<div class="row justify-content-center">
+    <form method="POST">
+        <h3>Connexion</h3>
+        <div class="form-group">
+            <label>E-mail</label>
+            <input class="form-control" type="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label>Mot de passe</label>
+            <input class="form-control" type="password" name="password" required>
+        </div>
+        <button class="btn btn-success my-3 w-100" type="submit">Connexion</button>
+    </form>
 </div>
 {% endblock %}
