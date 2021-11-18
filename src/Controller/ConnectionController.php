@@ -22,4 +22,12 @@ class ConnectionController extends AbstractController
             'controller_name' => 'ConnectionController',
         ]);
     }
+
+    #[Route('/login', name: "postLogin")]
+    public function postLogin():Response
+    {
+        return $this->render('connection/register.html.twig', [
+            'controller_name' => 'ConnectionController',
+        ]);
+    }
 }
