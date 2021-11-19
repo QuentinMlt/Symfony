@@ -2,17 +2,25 @@
 
 namespace App\Controller;
 
+use App\Repository\ClimbRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ClimbController extends AbstractController
-{
+{   
+    public function __construct(private ClimbRepository $climbRepository)
+    {
+        
+    }
+
+
     #[Route('/listClimb', name: 'listClimb')]
     public function list(): Response
     {
         return $this->render('climb/list.html.twig', [
             'controller_name' => 'ClimbController',
+            'climbs' =>  $this->climbRepository->listClimb()->getResult()
         ]);
     }
 
