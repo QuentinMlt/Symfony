@@ -35,7 +35,24 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
         ;
     }
-
+    public function updateUser($id, $data):Query
+    {
+        if ($data['password'] === null) {
+            return $this->createQueryBuilder('user')
+                        ->update('user', 'u')
+                        ->set('u.nom', '"'.$data['nom'].'"')
+                        ->set('u.prenom', '"'.$data['prenom'].'"')
+                        ->where("u.id = '$id'")
+                        ->getQuery();
+        }
+        return $this->createQueryBuilder('user')
+                    ->update('user', 'u')
+                    ->set('u.nom', '"'.$data['nom'].'"')
+                    ->set('u.prenom', '"'.$data['prenom'].'"')
+                    ->set('u.password', '"'.$data['password'].'"')
+                    ->where("u.id = '$id'")
+                    ->getQuery();
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
