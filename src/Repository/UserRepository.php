@@ -20,7 +20,8 @@ class UserRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, User::class);
     }
-    public function loginUser($email, $password):Query{
+    public function loginUser($email, $password):Query
+    {
         return $this->createQueryBuilder('user')
                     ->select('user')
                     ->where("user.email = '$email'")

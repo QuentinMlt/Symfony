@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Climb;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +18,14 @@ class ClimbRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Climb::class);
+    }
+
+    public function listClimb():Query
+    {
+        return $this->createQueryBuilder('climb')
+            ->orderBy('climb.date','ASC')
+            ->getQuery()
+        ;
     }
 
     // /**
