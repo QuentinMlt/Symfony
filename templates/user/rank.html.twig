@@ -37,7 +37,19 @@
               <td>{{user.nom}}</td>
               <td>{{user.prenom}}</td>
               <td>{{user.score}}</td>
+
+              {% if user.ladder == "Bronze" %}
               <td><p class="badge" style="background-color: #CD7F32">{{user.ladder}}</p></td>
+              {% endif %}
+
+              {% if user.ladder == "Argent" %}
+              <td><p class="badge" style="background-color: #bdc3c7">{{user.ladder}}</p></td>
+              {% endif %}
+
+              {% if user.ladder == "Or" %}
+              <td><p class="badge" style="background-color: #f1c40f">{{user.ladder}}</p></td>
+              {% endif %}
+              
           </tr>
           {% endfor %}
           
