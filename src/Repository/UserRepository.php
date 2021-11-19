@@ -27,6 +27,15 @@ class UserRepository extends ServiceEntityRepository
                     ->andWhere("user.password = '$password'")
                     ->getQuery();
     }
+
+    public function rankUsers():Query
+    {
+        return $this->createQueryBuilder('User')
+            ->orderBy('User.score', 'DESC')
+            ->getQuery()
+        ;
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
