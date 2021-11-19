@@ -20,6 +20,7 @@ class Users extends Fixture
                 ->setLadder("Bronze")
                 ->setPrenom("User$i-prenom")
                 ->setPassword("user$i")
+                ->setRoles("ROLE_USER")
                 ;
 
                 $manager->persist($entity);
