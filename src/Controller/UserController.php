@@ -21,6 +21,8 @@ class UserController extends AbstractController
     #[Route('/profile/{id}', name: 'profile')]
     public function profile($id, RequestStack $request, UserRepository $userRepo): Response
     {
+        $userAuth = $this->getUser();
+        $boolAuth = $this->isGranted('IS_AUTHENTICATED_FULLY');
         $user = $userRepo->find($id);
         $type = ProfileFormType::class;
         $form = $this->createForm($type);
@@ -35,7 +37,9 @@ class UserController extends AbstractController
         return $this->render('user/profile.html.twig', [
             'controller_name' => 'UserController',
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'userAuth' => $userAuth,
+            'boolAuth' => $boolAuth
         ]);
     }
 

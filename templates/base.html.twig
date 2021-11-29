@@ -41,14 +41,23 @@
             <li class="nav-item">
             <a class="nav-link active badge bg-primary rounded mx-1" aria-current="page" href="/listClimb">Climbs</a>
             </li>
+            {% if is_granted("ROLE_USER")%}
             <li class="nav-item">
                 <a class="nav-link active badge bg-primary rounded mx-1" aria-current="page" href="/listClimb">Add Climbs</a>
             </li>
+            {% endif %}
         </ul>
+        {% if is_granted("ROLE_USER") %}
         <span class="navbar-text">
-            <a class="nav-link active badge bg-light rounded mx-1 text-primary" aria-current="page" href="/login">Login</a>
+            <a class="nav-link active badge bg-light rounded mx-1 text-primary" aria-current="page" href="/profile/{{app.user.id}}">Profile</a>
+            <a class="nav-link active badge rounded mx-1 text-light bg-danger" aria-current="page" href="/logout">Logout</a>
+        </span>
+        {% else %}
+        <span class="navbar-text">
+            <a class="nav-link active badge bg-success rounded mx-1 text-light" aria-current="page" href="/login">Login</a>
             <a class="nav-link active badge bg-light rounded mx-1 text-primary" aria-current="page" href="/register">Register</a>
         </span>
+        {% endif %}
         </div>
     </div>
     </nav>
