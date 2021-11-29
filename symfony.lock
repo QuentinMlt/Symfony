@@ -504,7 +504,7 @@
         ]
     },
     "symfony/security-core": {
-        "version": "v5.3.10"
+        "version": "v5.3.11"
     },
     "symfony/security-csrf": {
         "version": "v5.3.4"
@@ -513,7 +513,7 @@
         "version": "v5.3.7"
     },
     "symfony/security-http": {
-        "version": "v5.3.10"
+        "version": "v5.3.11"
     },
     "symfony/serializer": {
         "version": "v5.3.10"

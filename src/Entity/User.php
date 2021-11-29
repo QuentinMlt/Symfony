@@ -11,9 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @ORM\Table(name="`user`")
  */
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -33,6 +32,12 @@ class User implements UserInterface
     private $roles = [];
 
     /**
+     * @var string The hashed password
+     * @ORM\Column(type="string")
+     */
+    private $password;
+
+    /**
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
@@ -41,11 +46,6 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $prenom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $password;
 
     /**
      * @ORM\Column(type="integer")
@@ -121,12 +121,13 @@ class User implements UserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        //$roles[] = 'ROLE_USER';
 
-        return array_unique($roles);
+        //return array_unique($roles);
+        return  [ 'ROLE_USER' ];
     }
 
-    public function setRoles(string $roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
@@ -134,13 +135,11 @@ class User implements UserInterface
     }
 
     /**
-     * This method can be removed in Symfony 6.0 - is not needed for apps that do not check user passwords.
-     *
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
-        return null;
+        return $this->password;
     }
 
     public function setPassword(string $password): self
@@ -151,7 +150,8 @@ class User implements UserInterface
     }
 
     /**
-     * This method can be removed in Symfony 6.0 - is not needed for apps that do not check user passwords.
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
      *
      * @see UserInterface
      */

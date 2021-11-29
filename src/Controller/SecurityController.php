@@ -2,54 +2,28 @@
 
 namespace App\Controller;
 
-use App\Form\LoginFormType;
-use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-
-    #[Route('/login', name: 'security.login')]
-    public function login(AuthenticationUtils $authenticationUtils, RequestStack $request, UserRepository $userRepo): Response
+    /**
+     * @Route("/login", name="app_login")
+     */
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        $type = LoginFormType::class;
-        $form = $this->createForm($type);
-        /*if ($request->getCurrentRequest()->isMethod('POST')) {
-            dd($this->getUser());
-            dd('lol');
-            $form->handleRequest($request->getCurrentRequest());
-            if ($form->isSubmitted() && $form->isValid()) {
-                $user = $userRepo->loginUser($form->getData()['email'],$form->getData()['password'])->getResult();
-                if (count($user) === 1) {
-                    return$this->redirectToRoute('home');
-                }
-                else{
-                    return $this->render('security/login.html.twig', [
-                        'controller_name' => 'SecurityController',
-                        'form' => $form->createView(),
-                        'errorConnexion' => true
-                    ]);
-                }
-            }
-        }*/
-        return $this->render('security/login.html.twig', [
-            'controller_name' => 'SecurityController',
-            'form' => $form->createView()
-        ]);
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
-        /*
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);*/
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**
