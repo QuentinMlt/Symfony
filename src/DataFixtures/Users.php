@@ -19,7 +19,7 @@ class Users extends Fixture
                 ->setScore(random_int(0,9))
                 ->setLadder("Bronze")
                 ->setPrenom("User$i-prenom")
-                ->setPassword("user$i")
+                ->setPassword('$13$W2HxDkChc/bGBc8FoyyOH.2u46J/2QgtR33ULtQwL.BFhDeeVgKQW')
                 ->setRoles("ROLE_USER")
                 ;
 
