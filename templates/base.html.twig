@@ -41,9 +41,9 @@
             <li class="nav-item">
             <a class="nav-link active badge bg-primary rounded mx-1" aria-current="page" href="/listClimb">Climbs</a>
             </li>
-            {% if is_granted("ROLE_USER")%}
+            {% if is_granted("ROLE_USER") %}
             <li class="nav-item">
-                <a class="nav-link active badge bg-primary rounded mx-1" aria-current="page" href="/listClimb">Add Climbs</a>
+                <a class="nav-link active badge bg-primary rounded mx-1" aria-current="page" href="/createClimb">Add Climbs</a>
             </li>
             {% endif %}
         </ul>
