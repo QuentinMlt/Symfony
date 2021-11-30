@@ -3,18 +3,52 @@
 {% block title %}Création{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/Repository_Github/Symfony/src/Controller/ClimbController.php'|file_link(0) }}">src/Controller/ClimbController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/Repository_Github/Symfony/templates/climb/create.html.twig'|file_link(0) }}">templates/climb/create.html.twig</a></code></li>
-    </ul>
+<div class="row">
+    <div class="col-12">
+        <h2>Création d'une activité d'escalade</h2>
+    </div>
+    <div class="col-12">
+        {{ form_start(form) }}
+        <div class="form-group my-2">
+            {{form_label(form.nom, "Nom :")}}
+            {{form_widget(form.nom, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez un nom'}})}}
+            {{form_errors(form.nom)}}
+        </div>
+        <div class="form-group my-2">
+            {{form_label(form.date, "Date :")}}
+            {{form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez une date'}})}}
+            {{form_errors(form.date)}}
+        </div>
+        <div class="form-group my-2">
+            {{form_label(form.image, "Image :")}}
+            {{form_widget(form.image, {'attr': {'class': 'form-control', 'required': false}})}}
+            {{form_errors(form.image)}}
+        </div>
+        <div class="form-group my-2">
+            {{form_label(form.description, "Description :")}}
+            {{form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez une description'}})}}
+            {{form_errors(form.description)}}
+        </div>
+        <div class="form-group my-2">
+            {{form_label(form.localisation, "Localisation :")}}
+            {{form_widget(form.localisation, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez une localisation'}})}}
+            {{form_errors(form.localisation)}}
+        </div>
+        <div class="form-group my-2">
+            {{form_label(form.requireRank, "Rang requis :")}}
+            {{form_widget(form.requireRank, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez un rang minimal'}})}}
+            {{form_errors(form.requireRank)}}
+        </div>
+        <div class="form-group my-2">
+            {{form_label(form.maxUser, "Nombre de participant maximal :")}}
+            {{form_widget(form.maxUser, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez un nombre de participant'}})}}
+            {{form_errors(form.maxUser)}}
+        </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <div class="text-light">
+            <input class="btn btn-primary w-100 my-3" type="submit" value="Sauvegarder">
+        </div>
+        {{ form_end(form) }}
+    </div>
 </div>
 {% endblock %}
