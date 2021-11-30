@@ -28,6 +28,27 @@ class ClimbRepository extends ServiceEntityRepository
         ;
     }
 
+    public function createClimb($user, $data)
+    {
+        $climb = new Climb();
+        $climb->setNom($data->getNom());
+        $climb->setDate($data->getDate());
+        if ($data->getImage()) {
+            $climb->setImage($data->getImage());
+        }
+        else{
+            $climb->setImage("https://image.shutterstock.com/image-vector/no-image-vector-isolated-on-600w-1481369594.jpg");
+        }
+        $climb->setDescription($data->getDescription());
+        $climb->setLocalisation($data->getLocalisation());
+        $climb->setRequireRank($data->getRequireRank());
+        $climb->setMaxUser($data->getMaxUser());
+        $climb->setUser($user);
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($climb);
+        $entityManager->flush();
+    }
+
     // /**
     //  * @return Climb[] Returns an array of Climb objects
     //  */
