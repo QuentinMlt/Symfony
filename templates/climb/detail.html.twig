@@ -17,26 +17,45 @@
                     <p class="card-text">{{climb.localisation}}</p>
                     <p class="card-text">Ecrit par {{climb.user.nom}}</p>
                 </div>
-                <button class="btn btn-success mt-5">Participer</button>
+                {% if app.user %}
+                <a href="/participateEvent/{{climb.id}}" class="btn btn-success mt-5">Participer</a>
+                {% endif %}
                 </div>
     </div>
 
     <div>
     
-    <h3>Commentaires</h3>
-    <hr>
-    <div class="row">
-    {% if comments != null %}
-        {% for comment in comments %}
-            <div class="col">
-                <h4>Commentaire de {{comment.user.nom}} </h4>   
-                <div class="overflow-auto">{{comment.description}}</div>
-                <img src="{{comment.image}}" class="mt-2" style="width: 10%;">
-            </div>
-        {% endfor %}
-    {% endif %}
-    </div>
-    <button class="btn btn-success float-end">Ecrire un commentaire</button>
+        <h3>Commentaires</h3>
+        <hr>
+        <div class="row">
+        {% if comments != null %}
+            {% for comment in comments %}
+                <div class="col-12 border mb-5 pb-3">
+                    <h4>Commentaire de {{comment.user.nom}} </h4>   
+                    <div class="overflow-auto">{{comment.description}}</div>
+                    <img src="{{comment.image}}" class="mt-2" style="width: 10%;">
+                </div>
+            {% endfor %}
+        {% endif %}
+        </div>
+        {% if app.user %}
+        {{ form_start(form) }}
+        <div class="form-group my-2">
+            {{form_label(form.image, "Image :")}}
+            {{form_widget(form.image, {'attr': {'class': 'form-control', 'required': false}})}}
+            {{form_errors(form.image)}}
+        </div>
+        <div class="form-group my-2">
+            {{form_label(form.description, "Description :")}}
+            {{form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Saisissez une description'}})}}
+            {{form_errors(form.description)}}
+        </div
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <div class="text-light">
+            <input class="btn btn-primary w-100 my-3" type="submit" value="Ecrire le commentaire">
+        </div>
+        {{ form_end(form) }}
+        {% endif %}
     </div>
 </div>
 {% endblock %}

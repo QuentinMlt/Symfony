@@ -36,6 +36,19 @@ class ParticipantRepository extends ServiceEntityRepository
     }
     */
 
+    public function Participate($user, $climb)
+    {
+        $participant = new Participant();
+        $participant->setUser($user);
+        $participant->setClimb($climb);
+        $participant->setIsValid(0);
+
+
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($participant);
+        $entityManager->flush();
+    }
+
     /*
     public function findOneBySomeField($value): ?Participant
     {

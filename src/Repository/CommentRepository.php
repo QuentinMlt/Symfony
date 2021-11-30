@@ -46,6 +46,23 @@ class CommentRepository extends ServiceEntityRepository
 
         ;
     }   
+
+    public function createComment($user,$climb, $data)
+    {
+        $comment = new Comment();
+        $comment->setUser($user);
+        $comment->setDescription($data->getDescription());
+        $comment->setClimb($climb);
+        if ($data->getImage()) {
+            $comment->setImage($data->getImage());
+        }
+        else{
+            $comment->setImage("https://image.shutterstock.com/image-vector/no-image-vector-isolated-on-600w-1481369594.jpg");
+        }
+        $entityManager = $this->getEntityManager();
+        $entityManager->persist($comment);
+        $entityManager->flush();
+    }
     /*
     public function findOneBySomeField($value): ?Comment
     {

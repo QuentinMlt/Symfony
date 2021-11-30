@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Form\ClimbCreateType;
+use App\Form\CommentType;
 use App\Repository\ClimbRepository;
 use App\Repository\CommentRepository;
+use App\Repository\ParticipantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -28,16 +30,19 @@ class ClimbController extends AbstractController
         ]);
     }
 
-    #[Route('/detailClimb/{id}', name: 'detailClimb')]
+    #[Route('/detailClimb/{id}', name: 'detailClimb', methods: "GET")]
     public function detail($id, ClimbRepository $climbRepository, CommentRepository $commentRepository): Response
     {
         $climb = $climbRepository->find($id);
+        $type = CommentType::class;
+        $form = $this->createForm($type);
         //dd($commentRepository->findCommentByClimb($id)->getResult());
         return $this->render('climb/detail.html.twig', [
             'controller_name' => 'ClimbController',
             'climb' => $climb,
-            'comments' => $commentRepository->findCommentByClimb($id)->getResult()
-        ]);
+            'comments' => $commentRepository->findCommentByClimb($id)->getResult(),
+            'form' => $form->createView()
+            ]);
     }
 
     #[Route('/createClimb', name: 'createClimb', methods: "GET")]
@@ -64,4 +69,15 @@ class ClimbController extends AbstractController
         }
         return $this->redirectToRoute('listClimb');
     }
+    
+    #[Route('/participateEvent/{id}', name: 'participateEvent', methods: "GET")]
+    public function Participate($id,Request $request, ClimbRepository $climbRepo, ParticipantRepository $participant): Response
+    {
+        
+        $user = $this->getUser();
+        $climb = $climbRepo->find($id);
+        $participant->Participate($user,$climb);
+        return $this->redirect("/detailClimb/$id");
+    }
 }
+
