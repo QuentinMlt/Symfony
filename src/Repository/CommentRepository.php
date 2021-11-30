@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query as ORMQuery;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -36,6 +37,15 @@ class CommentRepository extends ServiceEntityRepository
     }
     */
 
+    public function findCommentByClimb($climb):ORMQuery
+    {
+        return $this->createQueryBuilder('comment')
+            ->andWhere('comment.climb = :id')
+            ->setParameter('id', $climb)
+            ->getQuery()
+
+        ;
+    }   
     /*
     public function findOneBySomeField($value): ?Comment
     {

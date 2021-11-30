@@ -189,7 +189,7 @@ class Climb
     {
         if (!$this->comments->contains($comment)) {
             $this->comments[] = $comment;
-            $comment->setClimbId($this);
+            $comment->setClimb($this);
         }
 
         return $this;
@@ -199,8 +199,8 @@ class Climb
     {
         if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getClimbId() === $this) {
-                $comment->setClimbId(null);
+            if ($comment->getClimb() === $this) {
+                $comment->setClimb(null);
             }
         }
 
@@ -219,7 +219,7 @@ class Climb
     {
         if (!$this->participants->contains($participant)) {
             $this->participants[] = $participant;
-            $participant->setClimbId($this);
+            $participant->setClimb($this);
         }
 
         return $this;
@@ -229,8 +229,8 @@ class Climb
     {
         if ($this->participants->removeElement($participant)) {
             // set the owning side to null (unless already changed)
-            if ($participant->getClimbId() === $this) {
-                $participant->setClimbId(null);
+            if ($participant->getClimb() === $this) {
+                $participant->setClimb(null);
             }
         }
 

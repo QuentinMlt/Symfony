@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ClimbRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,10 +26,14 @@ class ClimbController extends AbstractController
     }
 
     #[Route('/detailClimb/{id}', name: 'detailClimb')]
-    public function detail(): Response
+    public function detail($id, ClimbRepository $climbRepository, CommentRepository $commentRepository): Response
     {
+        $climb = $climbRepository->find($id);
+        //dd($commentRepository->findCommentByClimb($id)->getResult());
         return $this->render('climb/detail.html.twig', [
             'controller_name' => 'ClimbController',
+            'climb' => $climb,
+            'comments' => $commentRepository->findCommentByClimb($id)->getResult()
         ]);
     }
 
