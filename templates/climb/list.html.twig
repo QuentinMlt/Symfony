@@ -6,18 +6,19 @@
 <div class="container">
     <div class="row row-cols-1 row-cols-md-2 g-4">
     {% for climb in climbs %}
-        <div class="col">
+        <div class="col-md-6 h-100">
             <div class="card">
             <img src="{{climb.image}}" class="card-img-top" >
             <div class="card-body">
-                <h5 class="card-title">{{climb.nom}}</h5>
+                <h5 class="card-title" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">{{climb.nom}}</h5>
                 <div class="row">
                 <p class="card-text col">{{climb.maxUser}}</p>
-                <p class="badge bg-primary">{{climb.requireRank}}</p>
+                <div class="card-text col"><div class="badge bg-warning text-dark">{{climb.requireRank}}</div></div>
                 </div>
                 <div class="card-text" style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap; height: 6em">{{climb.description}}</div>
                 <p class="card-text">{{climb.localisation}}</p>
                 <p class="card-text">Ecrit par {{climb.user.nom}}</p>
+                <button class="btn btn-success">Voir</button>
             </div>
             </div>
         </div>
