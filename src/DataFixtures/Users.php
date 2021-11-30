@@ -19,8 +19,8 @@ class Users extends Fixture
                 ->setScore(random_int(0,9))
                 ->setLadder("Bronze")
                 ->setPrenom("User$i-prenom")
-                ->setPassword('$13$W2HxDkChc/bGBc8FoyyOH.2u46J/2QgtR33ULtQwL.BFhDeeVgKQW')
-                ->setRoles("ROLE_USER")
+                ->setPassword('$2y$13$nSXkFbmZQoQlGQXQiIpkP.1bcXlIAqfKW7gE0h7iC6QE0mhRmLyyu')
+                ->setRoles(["ROLE_USER"])
                 ;
 
                 $manager->persist($entity);
