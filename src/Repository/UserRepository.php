@@ -54,6 +54,40 @@ class UserRepository extends ServiceEntityRepository
                     ->where("u.id = '$id'")
                     ->getQuery();
     }
+
+    public function updateScore($id, UserRepository $userRepository):Query
+    {
+        $user = $userRepository->find($id);
+
+        if ($user->getScore() == 9) {
+            return $this->createQueryBuilder('user')
+            ->update('user', 'u')
+            ->set('u.score', $user->getScore() + 1)
+            ->set('u.ladder', "Argent" )
+            ->where("u.id = '$id'")
+            ->getQuery()
+        ;
+        }
+        else if ($user->getScore() == 19) {
+            return $this->createQueryBuilder('user')
+            ->update('user', 'u')
+            ->set('u.score', $user->getScore() + 1)
+            ->set('u.ladder', "Or" )
+            ->where("u.id = '$id'")
+            ->getQuery()
+        ;
+        }
+        else
+        {
+            return $this->createQueryBuilder('user')
+            ->update('user', 'u')
+            ->set('u.score', $user->getScore() + 1)
+            ->where("u.id = '$id'")
+            ->getQuery()
+        ;
+        }
+        
+    }
     // /**
     //  * @return User[] Returns an array of User objects
     //  */

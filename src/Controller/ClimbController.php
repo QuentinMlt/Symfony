@@ -7,6 +7,7 @@ use App\Form\CommentType;
 use App\Repository\ClimbRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ParticipantRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -71,12 +72,14 @@ class ClimbController extends AbstractController
     }
     
     #[Route('/participateEvent/{id}', name: 'participateEvent', methods: "GET")]
-    public function Participate($id,Request $request, ClimbRepository $climbRepo, ParticipantRepository $participant): Response
+    public function Participate($id,Request $request, ClimbRepository $climbRepo, ParticipantRepository $participant, UserRepository $userRepository): Response
     {
         
         $user = $this->getUser();
         $climb = $climbRepo->find($id);
+        $userRepository->updateScore($user->getId(), $userRepository);
         $participant->Participate($user,$climb);
+
         return $this->redirect("/detailClimb/$id");
     }
 }
